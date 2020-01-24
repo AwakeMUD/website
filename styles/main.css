@@ -1,0 +1,6 @@
+.full_centered_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
