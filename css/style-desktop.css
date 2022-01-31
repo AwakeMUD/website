@@ -19,7 +19,7 @@
 		top: 3em;
 		left: 0;
 	}
-	
+
 	#logo h1 a {
 		float: left;
 		padding: 0em 0.25em 0em 0em;
@@ -30,7 +30,7 @@
 		font-weight: 800;
 		color: #FFF;
 	}
-	
+
 /* Menu */
 
 	#nav {
@@ -38,15 +38,15 @@
 		top: 1.1em;
 		right: 0;
 	}
-	
+
 	#nav ul {
 		text-align: center;
 	}
-	
+
 	#nav li {
 		display: inline-block;
 	}
-	
+
 	#nav a {
 		display: block;
 		float: left;
@@ -59,16 +59,16 @@
 		color: #FFF;
 		outline: 0;
 	}
-	
+
 	#nav .current_page_item {
 	}
-	
+
 	#nav .current_page_item a {
 		background: #2B8FC4;
 		box-shadow: inset 0px -15px 10px 0px rgba(0,0,0,0.10);
 		text-shadow: none;
 		color: #FFFFFF;
 	}
-	
+
 	#nav a:hover {
 	}

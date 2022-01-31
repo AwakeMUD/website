@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<!--
+	MegaCorp by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="en">
+	<head>
+		<title>AwakeMUD CE</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="The community edition of the Awakened Worlds MUD, a Shadowrun 3E text-based MMO set in Seattle of 2064." />
+		<meta name="keywords" content="Awakened Worlds, Awakened Worlds CE, AwakeMUD, AwakeMUD CE, Shadowrun MUD, MUD" />
+    <meta name="author" content="Lucien Sadi" />
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css" />
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="/js/skel.min.js"></script>
+		<script src="/js/skel-panels.min.js"></script>
+		<script src="/js/init.js"></script>
+		<noscript>
+			<link type="text/css" rel="preload" as="style" href="/css/skel-noscript.css" />
+			<link type="text/css" rel="preload" as="style" href="/css/style.css" />
+			<link type="text/css" rel="preload" as="style" href="/css/style-desktop.css" />
+		</noscript>
+	</head>
+  
+	<body>
+		<!-- Header -->
+    <div id="header-wrapper">
+  		<div id="header" class="container">
+        <div id="header_replace">
+          <!-- This is the static version of the header that is copied to all of the files. It's not been changed since 1/5/21. Updates go in /header.html. -->
+          <div id="logo">
+    				<h1><a href="/">AwakeMUD CE (NoScript Ver)</a></h1>
+    				<br>
+    				telnet: awakemud.com port 4000
+    			</div>
+          <nav id="nav">
+          	<ul>
+          		<li><a href="https://discord.gg/bKBpvNj">Discord</a></li>
+          		<li><a href="https://github.com/luciensadi/AwakeMUD">GitHub</a></li>
+              <li><a href="/wholist_page.html">Who's Online</a></li>
+          		<li class="current_page_item"><a href="https://grapevine.haus/games/AwakeCE/play">Play Now</a></li>
+          	</ul>
+          </nav>
+        </div>
+      </div>
+      <!-- This script replaces the static header above with the more-frequently-updated /header.html. -->
+      <script> $( '#header_replace' ).load( "/snippets/header.html" ) </script>  
+  	</div>
+		<!-- Header Ends Here -->
+
+		<!-- Page -->
+  	<div id="page">
+      	<div class="container">
+          	<div class="row">
+              	<div id="content" class="12u skel-cell-important">
+                  	<article>
+                      	<header> 
+                          <h2 class="main-title">Players Online</h2> 
+                        </header>
+                        <iframe src="https://awakemud.com/wholist.html" title="Wholist" class="image-style1" height=300></iframe>
+                        <p>Above is a list of the players online. This information is usually delayed by a few minutes.</p>
+                        <p>At launch, our peak playtimes were in the evenings and late nights in Pacific time.</p>
+                        <br>
+            						<p id="playnow_replace">
+                          <noscript>
+                            <h2><a href="https://grapevine.haus/games/AwakeCE/play">Click here</a> to play online.</h2></p>
+                						<p><h3>Prefer telnet? We're running at awakemud.com port 4000.</h3></p>
+                          </noscript>
+                          <script> $( '#playnow_replace' ).load( "/snippets/playnow.html" ) </script>  
+                        </p>
+                        <p>Looking for help? Join our <a href="https://discord.gg/bKBpvNj">Discord</a> and ask away! We're very welcoming of newcomers.</p>
+            						<p>AwakeMUD is 100% free (no microtransactions, cash shops, or any of that nonsense!)</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+		<!-- /Page -->
+
+		<!-- Copyright -->
+    <div id="copyright" class="container">
+        Design: <a href="http://templated.co" rel="nofollow">TEMPLATED</a> Images: <a href="https://unsplash.com/?utm_source=AwakeMUD%20CE%20Website&utm_medium=referral" rel="nofollow">Unsplash</a> (<a href="http://unsplash.com/cc0" rel="nofollow">CC0</a>)
+    </div>
+    <!-- /Copyright -->
+	</body>
+  
+</html>
