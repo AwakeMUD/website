@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballistic and Impact Calculator</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .armorName {
+          width: 20em;
+          padding: 0 4px;
+          text-align: right;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        pre {
+          display: inline;
+          background-color: #111;
+          color: lime;
+          padding: 0px 0.5em;
+        }
+        .setId {
+          width: 2em;
+        }
+    </style>
+</head>
+<body>
+<h1>AwakeCE Armor Layering Calculator</h1>
+<p><b>Instructions:</b>
+  <pre>probe</pre> your armor pieces in game to find their OOC values.  Then, enter each value as described:
+  <ul>
+    <li>
+      <em>Armor Name:</em> Any name you'd like for the armor
+    </li>
+
+    <li>
+      <em>Set ID:</em> If the item has "<pre>It is part of matched set number N.</pre>", enter the number here, otherewise leave it blank.
+    </li>
+    <li>
+      <em>Ballistic and Impact:</em> The amounts from the game output "<pre>It provides N ballistic armor and N impact armor.</pre>"
+    </li>
+    <li>
+      <em>Unlayered Ballistic and Impact:</em> The amounts from the game output "<pre>+N to Ballistic</pre>" "<pre>+N to Impact</pre>" (item example: <pre>a pair of forearm guards</pre>)
+    </li>
+  </ul> 
+</p>
+<p>
+  Add Armor:
+  <select id="addArmorId">
+    <option value="">Custom</option>
+    <option value="306" data-setid="" data-b="3" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a security vest (UNDER)</option>
+    <option value="318" data-setid="" data-b="5" data-i="3" data-ub="0" data-ui="0" data-formfit="false">an armor jacket (BODY, ABOUT)</option>
+    <option value="319" data-setid="" data-b="3" data-i="0" data-ub="0" data-ui="0" data-formfit="false">an armor shirt (BODY, UNDER)</option>
+    <option value="320" data-setid="" data-b="2" data-i="1" data-ub="0" data-ui="0" data-formfit="false">a pair of armor pants (LEGS)</option>
+    <option value="341" data-setid="" data-b="0" data-i="0" data-ub="0" data-ui="1" data-formfit="false">a pair of forearm guards (ARMS)</option>
+    <option value="347" data-setid="" data-b="4" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a Secure long coat (ABOUT)</option>
+    <option value="596" data-setid="" data-b="4" data-i="3" data-ub="0" data-ui="0" data-formfit="false">a plated armor vest (BODY, UNDER)</option>
+    <option value="809" data-setid="" data-b="2" data-i="1" data-ub="0" data-ui="0" data-formfit="false">an armor vest (BODY, UNDER)</option>
+    <option value="938" data-setid="" data-b="8" data-i="7" data-ub="0" data-ui="0" data-formfit="false">a suit of medium military armor (BODY)</option>
+    <option value="939" data-setid="" data-b="7" data-i="6" data-ub="0" data-ui="0" data-formfit="false">a suit of light military armor (BODY)</option>
+    <option value="940" data-setid="" data-b="0" data-i="0" data-ub="2" data-ui="3" data-formfit="false">a heavy military helmet (HEAD)</option>
+    <option value="941" data-setid="" data-b="6" data-i="5" data-ub="0" data-ui="0" data-formfit="false">a suit of medium security armor (BODY)</option>
+    <option value="942" data-setid="" data-b="7" data-i="5" data-ub="0" data-ui="0" data-formfit="false">a suit of heavy security armor (BODY)</option>
+    <option value="943" data-setid="" data-b="0" data-i="0" data-ub="1" data-ui="2" data-formfit="false">a security helmet (HEAD)</option>
+    <option value="944" data-setid="" data-b="6" data-i="4" data-ub="0" data-ui="0" data-formfit="false">partial heavy armor (BODY)</option>
+    <option value="1000" data-setid="" data-b="5" data-i="3" data-ub="0" data-ui="0" data-formfit="false">a Secure jacket (ABOUT)</option>
+    <option value="1041" data-setid="9" data-b="3.5" data-i="3.5" data-ub="0" data-ui="0" data-formfit="false">[9] an ornately stylized Serathilion Greatcoat (ABOUT)</option>
+    <option value="1042" data-setid="9" data-b="1.5" data-i="1.5" data-ub="0" data-ui="0" data-formfit="false">[9] a stylized Serathilion six-button vest (BODY)</option>
+    <option value="1043" data-setid="9" data-b="1.5" data-i="1.5" data-ub="0" data-ui="0" data-formfit="false">[9] a collared Serathilion dress shirt (UNDER)</option>
+    <option value="1044" data-setid="9" data-b="1.5" data-i="1.5" data-ub="0" data-ui="0" data-formfit="false">[9] a pair of Serathilion pleated dress slacks (LEGS)</option>
+    <option value="1045" data-setid="9" data-b="3.5" data-i="3.5" data-ub="0" data-ui="0" data-formfit="false">[9] a sleek and savvy Serulos overcoat (ABOUT)</option>
+    <option value="1046" data-setid="9" data-b="1.5" data-i="1.5" data-ub="0" data-ui="0" data-formfit="false">[9] a sleek and savvy Serulos business jacket (BODY)</option>
+    <option value="1047" data-setid="9" data-b="1.5" data-i="1.5" data-ub="0" data-ui="0" data-formfit="false">[9] a high-collar Serulos dress shirt (UNDER)</option>
+    <option value="1048" data-setid="9" data-b="1.5" data-i="1.5" data-ub="0" data-ui="0" data-formfit="false">[9] a pair of Serulos business slacks (LEGS)</option>
+    <option value="1050" data-setid="9" data-b="1" data-i="1" data-ub="0" data-ui="0" data-formfit="false">[9] a pair of slick Speren dress shoes (FEET)</option>
+    <option value="1121" data-setid="5" data-b="0.5" data-i="1" data-ub="0" data-ui="0" data-formfit="false">[5] a Vashon Island Sleeping Tiger vest (BODY)</option>
+    <option value="1122" data-setid="5" data-b="0.5" data-i="0.5" data-ub="0" data-ui="0" data-formfit="false">[5] a Vashon Island Sleeping Tiger skirt (LEGS)</option>
+    <option value="1123" data-setid="5" data-b="0.5" data-i="0.5" data-ub="0" data-ui="0" data-formfit="false">[5] a pair of Vashon Island Sleeping Tiger slacks (LEGS)</option>
+    <option value="1124" data-setid="5" data-b="0.5" data-i="1.5" data-ub="0" data-ui="0" data-formfit="false">[5] a Vashon Island Sleeping Tiger Jacket (ABOUT)</option>
+    <option value="1125" data-setid="5" data-b="0.5" data-i="1" data-ub="0" data-ui="0" data-formfit="false">[5] a Vashon Island Sleeping Tiger shirt (UNDER)</option>
+    <option value="1126" data-setid="4" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">[4] a Vashon Island Actioneer long coat (ABOUT)</option>
+    <option value="1127" data-setid="4" data-b="1.5" data-i="0.5" data-ub="0" data-ui="0" data-formfit="false">[4] a Vashon Island Actioneer hi-collar shirt (BODY)</option>
+    <option value="1128" data-setid="4" data-b="1" data-i="0.5" data-ub="0" data-ui="0" data-formfit="false">[4] a pair of Vashon Island Actioneer slacks (LEGS)</option>
+    <option value="1129" data-setid="4" data-b="1.5" data-i="1" data-ub="0" data-ui="0" data-formfit="false">[4] a Vashon Island Actioneer suit jacket (ABOUT)</option>
+    <option value="1842" data-setid="" data-b="0" data-i="0" data-ub="0" data-ui="1" data-formfit="false">a dented and scuffed motorcycle helmet (HEAD)</option>
+    <option value="1893" data-setid="" data-b="5" data-i="3" data-ub="0" data-ui="0" data-formfit="true">a form-fitting body armor IV (UNDER)</option>
+    <option value="2078" data-setid="" data-b="4" data-i="3" data-ub="0" data-ui="0" data-formfit="false">a plated kevlar vest (BODY, UNDER)</option>
+    <option value="2129" data-setid="" data-b="1" data-i="1" data-ub="0" data-ui="0" data-formfit="false">A lovely Vashon Island 'Grand Dame' violet dress (BODY)</option>
+    <option value="2132" data-setid="3" data-b="1" data-i="0" data-ub="0" data-ui="0" data-formfit="false">[3] an Armante Venetian evening gown (BODY, UNDER)</option>
+    <option value="2194" data-setid="" data-b="3" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a Victory wild hunt line camouflage jumpsuit (UNDER)</option>
+    <option value="2195" data-setid="" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a Victory wild hunt line camouflage vest (BODY)</option>
+    <option value="2196" data-setid="" data-b="4" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a Victory wild hunt line camouflage jacket (ABOUT)</option>
+    <option value="2197" data-setid="" data-b="0" data-i="0" data-ub="0" data-ui="2" data-formfit="false">a Victory rapid transit line helmet (HEAD)</option>
+    <option value="2198" data-setid="" data-b="1" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a Victory rapid transit line light jumpsuit (BODY)</option>
+    <option value="2199" data-setid="" data-b="2" data-i="4" data-ub="0" data-ui="0" data-formfit="false">a Victory rapid transit line heavy jumpsuit (BODY)</option>
+    <option value="2200" data-setid="" data-b="0" data-i="0" data-ub="0" data-ui="1" data-formfit="false">a Victory industrious line hard hat (HEAD)</option>
+    <option value="2201" data-setid="" data-b="2" data-i="0" data-ub="0" data-ui="0" data-formfit="false">a Victory industrious line jumpsuit (UNDER)</option>
+    <option value="2202" data-setid="" data-b="4" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a set of Victory industrious line coveralls (BODY)</option>
+    <option value="2203" data-setid="" data-b="1" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a pair of Victory industrious line work boots (FEET)</option>
+    <option value="2205" data-setid="" data-b="0" data-i="0" data-ub="0" data-ui="1" data-formfit="false">A shielded visor riot helmet (HEAD)</option>
+    <option value="2206" data-setid="" data-b="1" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a small riot shield (SHIELD)</option>
+    <option value="2207" data-setid="" data-b="3" data-i="1" data-ub="0" data-ui="0" data-formfit="false">a ballistic riot shield (SHIELD)</option>
+    <option value="2589" data-setid="" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a London Fog 'Professional' overcoat (ABOUT)</option>
+    <option value="2979" data-setid="3" data-b="1" data-i="0" data-ub="0" data-ui="0" data-formfit="false">[3] an Armante Ancien shawl (BACK)</option>
+    <option value="2980" data-setid="3" data-b="1" data-i="0" data-ub="0" data-ui="0" data-formfit="false">[3] an Armante Venetian cocktail dress (BODY, UNDER)</option>
+    <option value="2981" data-setid="" data-b="1" data-i="1" data-ub="0" data-ui="0" data-formfit="false">an Armante Starlight full length dress (BODY, UNDER)</option>
+    <option value="2982" data-setid="2" data-b="0.5" data-i="0.25" data-ub="0" data-ui="0" data-formfit="false">[2] an Armante Executive Suite vest (BODY)</option>
+    <option value="2983" data-setid="2" data-b="1" data-i="0.5" data-ub="0" data-ui="0" data-formfit="false">[2] an Armante Executive Suite tailed jacket (ABOUT)</option>
+    <option value="2984" data-setid="2" data-b="0.75" data-i="0.25" data-ub="0" data-ui="0" data-formfit="false">[2] a pair of Armante Executive Suite pants (LEGS)</option>
+    <option value="2985" data-setid="2" data-b="0.75" data-i="0" data-ub="0" data-ui="0" data-formfit="false">[2] an Armante Executive Suite split-cuff shirt (UNDER)</option>
+    <option value="2986" data-setid="" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a London Fog 'Merlin' cloak (ABOUT)</option>
+    <option value="2987" data-setid="" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a London Fog 'Majesty' overcoat (ABOUT)</option>
+    <option value="2988" data-setid="" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a London Fog 'Chairman' great coat (ABOUT)</option>
+    <option value="2989" data-setid="" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">a London Fog 'Count' cloak (ABOUT)</option>
+    <option value="2990" data-setid="1" data-b="0.75" data-i="0" data-ub="0" data-ui="0" data-formfit="false">[1] an Armante Dallas cross-buttoned shirt (UNDER)</option>
+    <option value="2991" data-setid="1" data-b="2" data-i="2" data-ub="0" data-ui="0" data-formfit="false">[1] an Armante Dallas double breasted jacket (ABOUT)</option>
+    <option value="2992" data-setid="1" data-b="1" data-i="0.5" data-ub="0" data-ui="0" data-formfit="false">[1] an Armante Dallas short jacket (ABOUT)</option>
+    <option value="2993" data-setid="1" data-b="0.75" data-i="0.25" data-ub="0" data-ui="0" data-formfit="false">[1] a pair of Armante Dallas slacks (LEGS)</option>
+    <option value="2994" data-setid="1" data-b="0.5" data-i="0.25" data-ub="0" data-ui="0" data-formfit="false">[1] an Armante Dallas Vest (BODY)</option>
+    <option value="3032" data-setid="" data-b="3" data-i="0" data-ub="0" data-ui="0" data-formfit="false">a Secure shirt (UNDER)</option>
+  </select>
+  <button onclick="addRow()">+</button>
+</p>
+<table id="armors">
+    <thead>
+      <tr>
+          <th>Result</th>
+          <th>Armor Name</th>
+          <th>Set ID</th>
+          <th>Ballistic</th>
+          <th>Impact</th>
+          <th>Unlayered Ballistic</th>
+          <th>Unlayered Impact</th>
+          <th>Form Fit</th>
+          <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="row-0">
+          <td class="rowResult"></td>
+          <td><input class="armorName" type="text" value="Armor Name" onchange="calculateTotal()"></td>
+          <td><input class="setId" type="text" pattern="^[0-9]*$" title="Must be a whole number or null" onchange="calculateTotal()"></td>
+          <td><input class="ballistic" type="number" step="0.1" min="0" max="20" value="0.0" onchange="calculateTotal()"></td>
+          <td><input class="impact" type="number" step="0.1" min="0" max="20" value="0.0" onchange="calculateTotal()"></td>
+          <td><input class="unlayeredBallistic" type="number" step="0.1" min="0" max="20" value="0.0" onchange="calculateTotal()"></td>
+          <td><input class="unlayeredImpact" type="number" step="0.1" min="0" max="20" value="0.0" onchange="calculateTotal()"></td>
+          <td><input class="formFit" type="checkbox" onchange="calculateTotal()"></td>
+          <td><button onclick="deleteRow(this)">x</button></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+          <td colspan="3" style="text-align: right;"">Total</td>
+          <td><span id="totalBallistic">0</span>b</td>
+          <td><span id="totalImpact">0</span>i</td>
+          <td colspan="4"></td>
+      </tr>
+      <tr>
+          <td colspan="3" style="text-align: right;">A penalty is applied if your Quickness attribute is less than:</td>
+          <td id="totalPenalty">0.0</td>
+          <td colspan="5"></td>
+      </tr>
+    </tfoot>
+</table>
+<p id="results"></p>
+
+<script>
+  let rowCount = 1;
+  function addRow() {
+    const select = document.getElementById("addArmorId");
+    const itemSelected = !!select.selectedIndex;
+    const selectedOption = itemSelected && select.options[select.selectedIndex];
+    const name = selectedOption?.text ?? 'Armor Name';
+    const setId = itemSelected ? selectedOption?.dataset?.setid : null;
+    const ballistic = itemSelected ? selectedOption?.dataset?.b : 0.0;
+    const impact = itemSelected ? selectedOption?.dataset?.i : 0.0;
+    const unlayeredBallistic = itemSelected ? selectedOption?.dataset?.ub : 0.0;
+    const unlayeredImpact = itemSelected ? selectedOption?.dataset?.ui : 0.0;
+
+    const lastRow = document.querySelector('#armors tbody tr:last-of-type');
+    const newRow = lastRow.cloneNode(true);
+    newRow.classList = `row-${rowCount}`;
+    newRow.querySelector('input.armorName').value = name;
+    newRow.querySelector('input.setId').value = setId;
+    newRow.querySelector('input.ballistic').value = ballistic;
+    newRow.querySelector('input.impact').value = impact;
+    newRow.querySelector('input.unlayeredBallistic').value = unlayeredBallistic;
+    newRow.querySelector('input.unlayeredImpact').value = unlayeredImpact;
+    newRow.querySelector('input.formFit').checked = selectedOption?.dataset?.formfit === 'true';
+    document.querySelector('#armors tbody').appendChild(newRow);
+    rowCount += 1;
+    calculateTotal();
+  }
+
+  function deleteRow(button) {
+    const row = button.parentNode.parentNode;
+    row.remove();
+    calculateTotal();
+  }
+  
+  function Row(label, ballistic, impact, unlayeredBallistic, unlayeredImpact, formFit = false, setId = null, cssSelector = "") {
+      this.label = label;
+      this.setId = setId;
+      this.ballistic = ballistic;
+      this.impact = impact;
+      this.unlayeredBallistic = unlayeredBallistic;
+      this.unlayeredImpact = unlayeredImpact;
+      this.totalForLayering = ballistic + impact;
+      this.countsForPenalty = !!!formFit;
+      this.actualBallistic = ballistic;
+      this.actualImpact = impact;
+      this.layerRuleApplied = "full";
+      this.cssSelector = cssSelector;
+  }
+  
+  function calculateTotal() {
+    let layeredList = [];
+    let totalBallistic = 0;
+    let totalImpact = 0;
+    let totalBallisticPenalty = 0;
+    let totalImpactPenalty = 0;
+
+    // Loop through each row to calculate the totals
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const label = row.querySelector('input.armorName').value;
+      const setId = row.querySelector('input.setId').value;
+      const ballistic = parseFloat(row.querySelector('input.ballistic').value);
+      const impact = parseFloat(row.querySelector('input.impact').value);
+      const unlayeredBallistic = parseFloat(row.querySelector('input.unlayeredBallistic').value);
+      const unlayeredImpact = parseFloat(row.querySelector('input.unlayeredImpact').value);
+      const formFit = row.querySelector('input.formFit').checked;
+      const cssSelector = `.${row.classList}`;
+
+      const newRow = new Row(label, ballistic, impact, unlayeredBallistic, unlayeredImpact, formFit, setId, cssSelector);
+      layeredList.push(newRow);
+
+      if (setId) {
+        const pastelColor = getRandomPastelColor(setId);
+        row.style.backgroundColor = pastelColor;
+      } else {
+        row.style.backgroundColor = 'white';
+      }
+    });
+
+    // Combine set pieces
+    let combinedList = layeredList.reduce((accumulator, currentRow) => {
+      const existingRow = accumulator.find(row => row.setId === currentRow.setId);
+        if (existingRow && currentRow.setId != "") {
+          existingRow.label = `Set #${existingRow.setId}`;
+          existingRow.ballistic += currentRow.ballistic;
+          existingRow.impact += currentRow.impact;
+          existingRow.unlayeredBallistic += currentRow.unlayeredBallistic;
+          existingRow.unlayeredImpact += currentRow.unlayeredImpact;
+          existingRow.totalForLayering += currentRow.totalForLayering;
+          existingRow.cssSelector += ", " + currentRow.cssSelector;
+        } else {
+          accumulator.push({ ...currentRow });
+        }
+        return accumulator;
+      }, []
+    );
+
+    // For each row in combinedList, truncate the values to whole integers.
+    combinedList.forEach((row, index) => {
+      row.ballistic = Math.floor(Math.round((row.ballistic + Number.EPSILON) * 10) / 10)
+      row.impact = Math.floor(Math.round((row.impact + Number.EPSILON) * 10) / 10)
+      row.unlayeredBallistic = Math.floor(Math.round((row.unlayeredBallistic + Number.EPSILON) * 10) / 10)
+      row.unlayeredImpact = Math.floor(Math.round((row.unlayeredImpact + Number.EPSILON) * 10) / 10)
+      row.totalForLayering = Math.floor(Math.round((row.totalForLayering + Number.EPSILON) * 10) / 10)
+    });
+
+    // Sort by total to find the unlayered piece
+    combinedList.sort((a, b) => {
+      return b.totalForLayering - a.totalForLayering;
+    });
+
+    // Apply the layering rules
+    combinedList.forEach((row, index) => {
+      let actualBallistic = row.ballistic;
+      let actualImpact = row.imapct;
+
+      if (index === 0) {
+        actualBallistic = row.ballistic;
+        actualImpact = row.impact;
+        row.layerRuleApplied = "full";
+      } else {
+        actualBallistic = row.ballistic / 2;
+        actualImpact = row.impact / 2;
+        row.layerRuleApplied = "layered";
+      } 
+
+      if (row.countsForPenalty) {
+        totalBallisticPenalty += row.ballistic;
+        totalImpactPenalty += row.impact;
+      }
+
+      if (row.unlayeredBallistic > 0 || row.unlayeredImpact > 0) {
+        row.layerRuleApplied = "+bonus";
+      }
+
+      actualBallistic += row.unlayeredBallistic;
+      actualImpact += row.unlayeredImpact;
+      totalBallistic += actualBallistic;
+      totalImpact += actualImpact;
+      row.actualBallistic = actualBallistic;
+      row.actualImpact = actualImpact;
+    });
+
+    // For advanced rounding
+    totalBallistic = Math.floor(Math.round((totalBallistic + Number.EPSILON) * 10) / 10)
+    totalImpact = Math.floor(Math.round((totalImpact + Number.EPSILON) * 10) / 10)
+
+    // Update the total values in the footer
+    document.getElementById('totalBallistic').textContent = totalBallistic.toFixed(0);
+    document.getElementById('totalImpact').textContent = totalImpact.toFixed(0);
+    document.getElementById('totalPenalty').textContent = Math.max(totalBallisticPenalty, totalImpactPenalty).toFixed(0);
+
+    // Update the results
+    combinedList.forEach((row, index) => {
+      const rows = document.querySelectorAll(row.cssSelector);
+      rows.forEach(rowElement => {
+        let result = `${row.actualBallistic}b ${row.actualImpact}i - `;
+
+        if (row.layerRuleApplied.includes("full")) {
+          result += `Full armor applied `;
+        }
+        if (row.layerRuleApplied.includes("layered")) {
+          result += `Layering rules applied `;
+        }
+        if (row.layerRuleApplied.includes("+bonus")) {
+          result += `Bonus applied`;
+        }
+
+        rowElement.querySelector('.rowResult').textContent = result;
+      });
+    });
+  }
+
+  // Just used to generate a pastel color for each set
+  function getCRC32Hash(str) {
+    const table = new Uint32Array(256);
+    for (let i = 0; i < 256; i++) {
+      let c = i;
+      for (let j = 0; j < 8; j++) {
+        c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      }
+      table[i] = c;
+    }
+
+    let crc = 0xFFFFFFFF;
+    for (let i = 0; i < str.length; i++) {
+      crc = (crc >>> 8) ^ table[(crc ^ str.charCodeAt(i)) & 0xFF];
+    }
+    crc ^= 0xFFFFFFFF;
+    return crc >>> 0;
+  }
+
+  function getRandomPastelColor(setId) {
+    const crc32Hash = getCRC32Hash(setId.toString());
+    const hue = crc32Hash % 360;
+    const pastelColor = `hsl(${hue}, 70%, 80%)`;
+    return pastelColor;
+  }
+</script>
+
+</body>
+</html>
