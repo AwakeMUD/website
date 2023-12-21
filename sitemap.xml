@@ -4,9 +4,9 @@
 
    <url>
 
-      <loc>https://awakemud.com/</loc>
+      <loc>https://www.awakemud.com/</loc>
 
-      <lastmod>2021-01-10</lastmod>
+      <lastmod>2023-12-21</lastmod>
 
       <changefreq>monthly</changefreq>
 
@@ -16,7 +16,7 @@
    
    <url>
 
-      <loc>https://awakemud.com/adept.html</loc>
+      <loc>https://www.awakemud.com/adept.html</loc>
 
       <lastmod>2021-01-10</lastmod>
 
@@ -26,7 +26,7 @@
    
    <url>
 
-      <loc>https://awakemud.com/decker.html</loc>
+      <loc>https://www.awakemud.com/decker.html</loc>
 
       <lastmod>2021-01-10</lastmod>
 
@@ -36,7 +36,7 @@
    
    <url>
 
-      <loc>https://awakemud.com/hermetic.html</loc>
+      <loc>https://www.awakemud.com/hermetic.html</loc>
 
       <lastmod>2021-01-10</lastmod>
 
@@ -46,7 +46,7 @@
    
    <url>
 
-      <loc>https://awakemud.com/shaman.html</loc>
+      <loc>https://www.awakemud.com/shaman.html</loc>
 
       <lastmod>2021-01-10</lastmod>
 
@@ -56,12 +56,20 @@
    
    <url>
 
-      <loc>https://awakemud.com/street_samurai.html</loc>
+      <loc>https://www.awakemud.com/street_samurai.html</loc>
 
       <lastmod>2021-01-10</lastmod>
 
       <changefreq>monthly</changefreq>
 
    </url>
+
+   <url>
+
+      <loc>https://www.awakemud.com/armor_calc.html</loc>
+
+      <lastmod>2023-12-21</lastmod>
+
+      <changefreq>monthly</changefreq>
 
 </urlset> 
