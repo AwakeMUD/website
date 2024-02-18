@@ -1,1 +1,4 @@
+User-agent: *
+Disallow: /dokuwiki/lib/exe/fetch.php
+
 Sitemap: https://awakemud.com/sitemap.xml
